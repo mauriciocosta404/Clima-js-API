@@ -36,6 +36,10 @@ function showInfo(json) {
     document.querySelector('.resultado').style.display='block';
 
     document.querySelector('.titulo').innerHTML=`${json.name}, ${json.country}`;
+
+    document.querySelector('.tempInfo').innerHTML=`${json.temp}<span>ºC</span>`;
+
+    document.querySelector('.ventoInfo').innerHTML=`${json.windSpeed}<span>km/h</span>`;
 }
 function showWarnning(msg) {
     document.querySelector('.aviso').innerHTML=msg;
