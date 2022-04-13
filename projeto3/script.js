@@ -6,6 +6,7 @@ document.querySelector('.busca').addEventListener('submit', async (event)=>{
       let input=document.querySelector('#searchInput').value;
 
       if(input){
+          clearInfo();
           showWarnning('carregando...');
 
           let url=`https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(input)}&appid=3c8b465bd8f53806fc84560fa9cd73ef&&units=metric&lang=pt_br`;
@@ -25,15 +26,17 @@ document.querySelector('.busca').addEventListener('submit', async (event)=>{
              });
              
           }else{
+             
               showWarnning('cidade não encontrada.');
+              clearInfo();
           }
+      }else{
+          clearInfo();
       }
 
 });
 
 function showInfo(json) {
-   
-    document.querySelector('.resultado').style.display='block';
 
     document.querySelector('.titulo').innerHTML=`${json.name}, ${json.country}`;
 
@@ -44,7 +47,14 @@ function showInfo(json) {
     document.querySelector('.temp img').setAttribute(`src`,`http://openweathermap.org/img/wn/${json.tempIcon}@2x.png`);
 
     document.querySelector('.ventoPonto').style.transform=`rotate(${json.windAngle-90}deg)`; 
+
+       
+    document.querySelector('.resultado').style.display='block';
 }
 function showWarnning(msg) {
     document.querySelector('.aviso').innerHTML=msg;
+}
+function clearInfo(params) {
+    showWarnning('');
+    document.querySelector('.resultado').style.display='none';
 }
